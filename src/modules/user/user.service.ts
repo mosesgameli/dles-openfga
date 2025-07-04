@@ -1,14 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { OpenFgaService } from '../openfga/openfga.service';
 import { nanoid } from 'nanoid';
-import { CreateDistrictDto, CreateGroupDto, CreateUserDto } from '../interface';
+import {
+  AssertionCheck,
+  CreateDistrictDto,
+  CreateGroupDto,
+  CreateUserDto,
+} from '../interface';
 import { PrismaService } from '../prisma.service';
+import { OPEN_FGA_CLIENT_SYMBOL } from '../openfga/openfga-client.factory';
+import { OpenFgaClient } from '@openfga/sdk';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly openFga: OpenFgaService,
     private readonly prisma: PrismaService,
+    @Inject(OPEN_FGA_CLIENT_SYMBOL)
+    private readonly openFgaClient: OpenFgaClient,
   ) {}
 
   getAuthModelId(): string {
@@ -19,18 +28,48 @@ export class UserService {
     const id = nanoid(7);
     const user = { ...dto, id };
 
-    return await this.prisma.user.create({
+    const result = await this.prisma.user.create({
       data: user,
     });
+
+    await this.openFgaClient.write(
+      {
+        writes: [
+          {
+            user: `user:${result.id}`,
+            relation: result.role,
+            object: `district:${result.districtId}`,
+          },
+        ],
+      },
+      { authorizationModelId: this.openFga.authId },
+    );
+  }
+
+  async checkUser(dto: AssertionCheck) {
+    return await this.openFgaClient.check(dto);
   }
 
   async createDistrict(dto: CreateDistrictDto) {
     const id = dto.name.toLowerCase().replace(' ', '-') + '-district';
     const district = { ...dto, id };
 
-    return await this.prisma.district.create({
+    const result = await this.prisma.district.create({
       data: district,
     });
+
+    await this.openFgaClient.write(
+      {
+        writes: [
+          {
+            user: `district:${result.id}`,
+            relation: 'branch',
+            object: `group:${result.groupId}`,
+          },
+        ],
+      },
+      { authorizationModelId: this.openFga.authId },
+    );
   }
 
   async createGroup(dto: CreateGroupDto) {

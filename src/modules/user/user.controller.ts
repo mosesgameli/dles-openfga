@@ -1,19 +1,24 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateDistrictDto, CreateGroupDto, CreateUserDto } from '../interface';
+import {
+  AssertionCheck,
+  CreateDistrictDto,
+  CreateGroupDto,
+  CreateUserDto,
+} from '../interface';
 
 @Controller()
 export class UserController {
   constructor(private readonly service: UserService) {}
 
-  @Get('/user')
-  authModelId() {
-    return this.service.getAuthModelId();
-  }
-
   @Post('/user')
   async create(@Body() dto: CreateUserDto) {
     return this.service.createUser(dto);
+  }
+
+  @Post('/user/check')
+  async checkUser(@Body() dto: AssertionCheck) {
+    return this.service.checkUser(dto);
   }
 
   @Post('/district')
