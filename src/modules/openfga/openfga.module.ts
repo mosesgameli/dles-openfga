@@ -4,6 +4,6 @@ import { OpenFgaService } from './openfga.service';
 
 @Module({
   providers: [OpenFgaClientProvider, OpenFgaService],
-  exports: [OpenFgaService],
+  exports: [OpenFgaClientProvider, OpenFgaService],
 })
 export class OpenFgaModule {}
