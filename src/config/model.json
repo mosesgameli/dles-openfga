@@ -1,0 +1,290 @@
+{
+  "schema_version": "1.1",
+  "type_definitions": [
+    {
+      "type": "user",
+      "relations": {},
+      "metadata": null
+    },
+    {
+      "type": "district",
+      "relations": {
+        "church_members": {
+          "union": {
+            "child": [
+              {
+                "this": {}
+              },
+              {
+                "computedUserset": {
+                  "relation": "pastor"
+                }
+              }
+            ]
+          }
+        },
+        "pastor": {
+          "this": {}
+        },
+        "group": {
+          "this": {}
+        },
+        "group_pastor": {
+          "tupleToUserset": {
+            "computedUserset": {
+              "relation": "pastor"
+            },
+            "tupleset": {
+              "relation": "group"
+            }
+          }
+        }
+      },
+      "metadata": {
+        "relations": {
+          "church_members": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              }
+            ]
+          },
+          "pastor": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              }
+            ]
+          },
+          "group": {
+            "directly_related_user_types": [
+              {
+                "type": "group"
+              }
+            ]
+          },
+          "group_pastor": {
+            "directly_related_user_types": []
+          }
+        }
+      }
+    },
+    {
+      "type": "group",
+      "relations": {
+        "pastor": {
+          "this": {}
+        },
+        "branch": {
+          "this": {}
+        },
+        "group_member": {
+          "union": {
+            "child": [
+              {
+                "computedUserset": {
+                  "relation": "pastor"
+                }
+              },
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "church_members"
+                  },
+                  "tupleset": {
+                    "relation": "branch"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "metadata": {
+        "relations": {
+          "pastor": {
+            "directly_related_user_types": [
+              {
+                "type": "user"
+              }
+            ]
+          },
+          "branch": {
+            "directly_related_user_types": [
+              {
+                "type": "district"
+              }
+            ]
+          },
+          "group_member": {
+            "directly_related_user_types": []
+          }
+        }
+      }
+    },
+    {
+      "type": "report",
+      "relations": {
+        "owner": {
+          "this": {}
+        },
+        "view": {
+          "union": {
+            "child": [
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "church_members"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              },
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "pastor"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "export": {
+          "union": {
+            "child": [
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "church_members"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              },
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "pastor"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "print": {
+          "union": {
+            "child": [
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "church_members"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              },
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "pastor"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "create": {
+          "union": {
+            "child": [
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "pastor"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              },
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "group_pastor"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "delete": {
+          "union": {
+            "child": [
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "pastor"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              },
+              {
+                "tupleToUserset": {
+                  "computedUserset": {
+                    "relation": "group_pastor"
+                  },
+                  "tupleset": {
+                    "relation": "owner"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "metadata": {
+        "relations": {
+          "owner": {
+            "directly_related_user_types": [
+              {
+                "type": "district"
+              }
+            ]
+          },
+          "view": {
+            "directly_related_user_types": []
+          },
+          "export": {
+            "directly_related_user_types": []
+          },
+          "print": {
+            "directly_related_user_types": []
+          },
+          "create": {
+            "directly_related_user_types": []
+          },
+          "delete": {
+            "directly_related_user_types": []
+          }
+        }
+      }
+    }
+  ]
+}
