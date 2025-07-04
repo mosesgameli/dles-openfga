@@ -12,32 +12,41 @@ datasource db {
 }
 
 model User {
-  id   String @id
-  name String @unique
-  role String
+  id         String    @id
+  name       String    @unique
+  role       String
+  District   District? @relation(fields: [districtId], references: [id])
+  districtId String?
 
   @@map("user")
 }
 
 model District {
-  id   String @id
-  name String @unique
+  id      String   @id
+  name    String   @unique
+  group   Group    @relation(fields: [groupId], references: [id])
+  groupId String
+  members User[]
+  reports Report[]
 
   @@map("district")
 }
 
 model Group {
-  id   String @id
-  name String @unique
+  id       String     @id
+  name     String     @unique
+  District District[]
 
   @@map("group")
 }
 
 model Report {
-  id        String   @id
-  name      String   @unique
-  link      String
-  updatedAt DateTime @updatedAt
+  id         String    @id
+  name       String    @unique
+  link       String
+  updatedAt  DateTime  @updatedAt
+  District   District? @relation(fields: [districtId], references: [id])
+  districtId String?
 
   @@map("report")
 }

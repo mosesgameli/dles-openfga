@@ -2,13 +2,17 @@
 CREATE TABLE "user" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "role" TEXT NOT NULL
+    "role" TEXT NOT NULL,
+    "districtId" TEXT,
+    CONSTRAINT "user_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "district" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateTable
 CREATE TABLE "district" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "name" TEXT NOT NULL
+    "name" TEXT NOT NULL,
+    "groupId" TEXT NOT NULL,
+    CONSTRAINT "district_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "group" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -22,7 +26,9 @@ CREATE TABLE "report" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "link" TEXT NOT NULL,
-    "updatedAt" DATETIME NOT NULL
+    "updatedAt" DATETIME NOT NULL,
+    "districtId" TEXT,
+    CONSTRAINT "report_districtId_fkey" FOREIGN KEY ("districtId") REFERENCES "district" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateIndex

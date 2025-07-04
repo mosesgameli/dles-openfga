@@ -120,12 +120,14 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  role: 'role'
+  role: 'role',
+  districtId: 'districtId'
 };
 
 exports.Prisma.DistrictScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  groupId: 'groupId'
 };
 
 exports.Prisma.GroupScalarFieldEnum = {
@@ -137,12 +139,18 @@ exports.Prisma.ReportScalarFieldEnum = {
   id: 'id',
   name: 'name',
   link: 'link',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  districtId: 'districtId'
 };
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 
