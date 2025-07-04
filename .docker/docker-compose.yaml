@@ -1,0 +1,23 @@
+name: dles
+
+services:
+  openfga:
+    image: openfga/openfga:latest
+    environment:
+      - OPENFGA_DATASTORE_ENGINE=memory
+      # - OPENFGA_DATASTORE_URI=root:DpRD9KlGDMkbVGKk@tcp(mysql:3306)/allyq
+      - OPENFGA_LOG_FORMAT=text
+      - OPENFGA_HTTP_ADDR=0.0.0.0:8050
+      - OPENFGA_GRPC_ADDR=0.0.0.0:8051
+      - OPENFGA_PLAYGROUND_PORT=8052
+    command: run
+    networks:
+      - dles-network
+    ports:
+      - '8050:8050'
+      - '8051:8051'
+      - '8052:8052'
+
+networks:
+  dles-network:
+    driver: bridge

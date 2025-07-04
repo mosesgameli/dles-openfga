@@ -1,0 +1,121 @@
+{
+  "version": "v1.8.13",
+  "date": "2025-05-22T21:07:07Z",
+  "commit": "e5960d4eba92b723de8ff3a5346a07f50c1379ca",
+  "go-version": "go1.24.2",
+  "config": {
+    "ListObjectsDeadline": 3000000000,
+    "ListObjectsMaxResults": 1000,
+    "ListUsersDeadline": 3000000000,
+    "ListUsersMaxResults": 1000,
+    "MaxTuplesPerWrite": 100,
+    "MaxChecksPerBatchCheck": 50,
+    "MaxConcurrentChecksPerBatchCheck": 50,
+    "MaxTypesPerAuthorizationModel": 100,
+    "MaxAuthorizationModelSizeInBytes": 262144,
+    "MaxConcurrentReadsForListObjects": 4294967295,
+    "MaxConcurrentReadsForCheck": 4294967295,
+    "MaxConcurrentReadsForListUsers": 4294967295,
+    "MaxConditionEvaluationCost": 100,
+    "ChangelogHorizonOffset": 0,
+    "Experimentals": [],
+    "AccessControl": { "Enabled": false, "StoreID": "", "ModelID": "" },
+    "ResolveNodeLimit": 25,
+    "ResolveNodeBreadthLimit": 10,
+    "RequestTimeout": 3000000000,
+    "ContextPropagationToDatastore": false,
+    "Datastore": {
+      "Engine": "memory",
+      "Username": "",
+      "MaxCacheSize": 100000,
+      "MaxOpenConns": 30,
+      "MaxIdleConns": 10,
+      "ConnMaxIdleTime": 0,
+      "ConnMaxLifetime": 0,
+      "Metrics": { "Enabled": false }
+    },
+    "GRPC": {
+      "Addr": "0.0.0.0:8051",
+      "TLS": { "Enabled": false, "CertPath": "", "KeyPath": "" }
+    },
+    "HTTP": {
+      "Enabled": true,
+      "Addr": "0.0.0.0:8050",
+      "TLS": { "Enabled": false, "CertPath": "", "KeyPath": "" },
+      "UpstreamTimeout": 5000000000,
+      "CORSAllowedOrigins": ["*"],
+      "CORSAllowedHeaders": ["*"]
+    },
+    "Authn": {
+      "Method": "none",
+      "Issuer": "",
+      "IssuerAliases": [],
+      "Subjects": [],
+      "Audience": "",
+      "ClientIDClaims": []
+    },
+    "Log": { "Format": "text", "Level": "info", "TimestampFormat": "Unix" },
+    "Trace": {
+      "Enabled": false,
+      "OTLP": { "Endpoint": "0.0.0.0:4317", "TLS": { "Enabled": false } },
+      "SampleRatio": 0.2,
+      "ServiceName": "openfga"
+    },
+    "Playground": { "Enabled": true, "Port": 8052 },
+    "Profiler": { "Enabled": false, "Addr": ":3001" },
+    "Metrics": {
+      "Enabled": true,
+      "Addr": "0.0.0.0:2112",
+      "EnableRPCHistograms": false
+    },
+    "CheckCache": { "Limit": 10000 },
+    "CheckIteratorCache": {
+      "Enabled": false,
+      "MaxResults": 10000,
+      "TTL": 10000000000
+    },
+    "CheckQueryCache": { "Enabled": false, "TTL": 10000000000 },
+    "CacheController": { "Enabled": false, "TTL": 10000000000 },
+    "CheckDispatchThrottling": {
+      "Enabled": false,
+      "Frequency": 10000,
+      "Threshold": 100,
+      "MaxThreshold": 0
+    },
+    "ListObjectsDispatchThrottling": {
+      "Enabled": false,
+      "Frequency": 10000,
+      "Threshold": 100,
+      "MaxThreshold": 0
+    },
+    "ListUsersDispatchThrottling": {
+      "Enabled": false,
+      "Frequency": 10000,
+      "Threshold": 100,
+      "MaxThreshold": 0
+    },
+    "CheckDatabaseThrottle": {
+      "Enabled": false,
+      "Threshold": 0,
+      "Duration": 0
+    },
+    "ListObjectsDatabaseThrottle": {
+      "Enabled": false,
+      "Threshold": 0,
+      "Duration": 0
+    },
+    "ListUsersDatabaseThrottle": {
+      "Enabled": false,
+      "Threshold": 0,
+      "Duration": 0
+    },
+    "ListObjectsIteratorCache": {
+      "Enabled": false,
+      "MaxResults": 10000,
+      "TTL": 10000000000
+    },
+    "SharedIterator": { "Enabled": false, "Limit": 1000000 },
+    "RequestDurationDatastoreQueryCountBuckets": ["50", "200"],
+    "RequestDurationDispatchCountBuckets": ["50", "200"]
+  }
+}
